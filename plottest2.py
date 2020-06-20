@@ -16,7 +16,7 @@ from scipy import fftpack
 f = 1411  # Frequency, in cycles per second, or Hertz
 f_s = 44100  # Sampling rate, or number of measurements per second
 
-rate, audio = wavfile.read('nobody.wav')
+rate, audio = wavfile.read('soft_cell.wav')
 
 audio_in = np.mean(audio, axis=1)
 

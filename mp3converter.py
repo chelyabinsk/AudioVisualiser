@@ -7,5 +7,5 @@ Created on Sun Nov  4 21:42:40 2018
 """
 
 from pydub import AudioSegment
-sound = AudioSegment.from_mp3("black.mp3")
-sound.export("black.wav", format="wav")
+sound = AudioSegment.from_mp3("bonnie.mp3")
+sound.export("bonnie.wav", format="wav")

@@ -30,12 +30,13 @@ add_note(2,1)
 add_note(4,1)
 add_note(7,1)
 
-for i in range(0,round(44100*2)):
-    data.append(np.math.sin(notes[0]*i/rate*np.math.pi*2)
-             +  np.math.sin(notes[2]*i/rate*np.math.pi*2)
-             +  np.math.sin(notes[4]*i/rate*np.math.pi*2)
-             +  np.math.sin(notes[7]*i/rate*np.math.pi*2)
-             )
+for j in range(1,30):
+    for i in range(0,round(44100*2)):
+        data.append(np.math.sin(notes[0]*(i*j)/rate*np.math.pi*2)
+                 +  np.math.sin(notes[2]*(i*j)/rate*np.math.pi*2)
+                 +  np.math.sin(notes[4]*(i*j)/rate*np.math.pi*2)
+                 +  np.math.sin(notes[7]*(i*j)/rate*np.math.pi*2)
+                 )
 
 scaled = np.int16(data/np.max(np.abs(data)) * 32767)
 write('test.wav', 44100, scaled)
