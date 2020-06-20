@@ -1,15 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Nov  5 21:11:45 2018
+# Visualizes the rendered audio using static FFT
+# Use the other one 
 
-@author: pirate
-"""
-
-# Make plots appear inline, set custom plotting style
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
-
 import numpy as np
 from scipy import fftpack
 
@@ -34,7 +27,7 @@ x=audio
 fig, ax = plt.subplots()
 ax.plot(t, x)
 ax.set_xlabel('Time [s]')
-ax.set_ylabel('Signal amplitude');
+ax.set_ylabel('Signal amplitude')
 
 X = fftpack.fft(x)
 freqs = fftpack.fftfreq(len(x))*f_s
