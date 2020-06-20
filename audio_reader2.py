@@ -52,7 +52,6 @@ class Audio_fft():
                 6300,8000,10000,12000,16000,2000]
         
         # Split array
-        
         pos = 0
         separated_arrs = [0]*len(groups)
         
@@ -84,8 +83,9 @@ class Audio_fft():
     def get_wave(self,slice_num):
         return self.slices[slice_num]
     
-#audio = Audio_fft("test.wav",False)
-#plt.plot(audio.get_freq_array(),audio.get_fft(0,grouped=False))
-#plt.xlim(0,262)
-#
-#a=audio.get_fft(0)
+# audio = Audio_fft("soft_cell.wav", False)
+# plt.plot(audio.get_freq_array(),audio.get_fft(0,grouped=False))
+# plt.xlim(0,262)
+# plt.show()
+
+# a=audio.get_fft(0)
