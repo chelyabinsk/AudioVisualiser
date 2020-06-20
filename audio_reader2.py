@@ -1,12 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Nov 24 20:08:06 2018
+# Render the audio of the wav file
+# Not quite sure how it differs from the other one 
 
-https://stackoverflow.com/questions/604453/analyze-audio-using-fast-fourier-transform
+# Reference:
+# https://stackoverflow.com/questions/604453/analyze-audio-using-fast-fourier-transform
 
-@author: pirate
-"""
 
 
 from scipy.io import wavfile
@@ -24,8 +21,8 @@ class Audio_fft():
         if(stereo):
             self.audio = np.mean(self.audio, axis=1)
             
-        N = self.audio.shape[0]
-        L = N / self.rate
+        # N = self.audio.shape[0]
+        # L = N / self.rate
         
         print("Creating slices")
         self.slices = util.view_as_windows(self.audio, window_shape=(M,), step=step)

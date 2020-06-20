@@ -1,12 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov  2 23:12:10 2018
-
-@author: pirate
-"""
+# Visualizes the rendered audio using Dynamic FFT 
+# Use this file for the visualization
 
 import pygame
+import numpy
 from pygame import mixer
 import audio_reader2 as Audio
 import time
@@ -57,8 +53,7 @@ class Renderer():
             clock.tick(60)
             frame += 1
          
-        # Be IDLE friendly. If you forget this line, the program will 'hang'
-        # on exit.
+        # Be IDLE friendly. If you forget this line, the program will 'hang' on exit
         pygame.quit()
     
     def draw_fourier(self,data):
@@ -80,9 +75,9 @@ class Renderer():
         pygame.draw.rect(self.screen,(0,0,0),(144,350,512,300),2)
         # Width 770 pixels
         
-        dat = np.array(data)
+        dat = numpy.array(data)
         
-        avg = np.mean(dat.reshape(-1, 4), axis=1)
+        avg = numpy.mean(dat.reshape(-1, 4), axis=1)
         avg /= 2**15
         
         for i in range(len(avg)):
