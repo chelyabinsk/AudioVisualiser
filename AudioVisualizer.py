@@ -86,6 +86,6 @@ class Renderer():
         avg /= 2**15
         
         for i in range(len(avg)):
-            pygame.draw.rect(self.screen,(0,0,0),(144+i,525,1,-2.3*150*avg[i]))
+            pygame.draw.rect(self.screen,(0,0,0),(144+i,525,2.75,-2.3*150*avg[i]))
 
 app = Renderer(fps=30)
