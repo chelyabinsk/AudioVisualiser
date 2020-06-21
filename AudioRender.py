@@ -17,6 +17,7 @@ class Audio_fft():
         if(stereo):
             self.audio = np.mean(self.audio, axis=1)
             
+<<<<<<< HEAD:AudioRender.py
 <<<<<<< HEAD:audio_reader2.py
         N = self.audio.shape[0]
         L = N / self.rate
@@ -25,14 +26,19 @@ class Audio_fft():
         #print(f'Audio shape: {self.audio.shape}, Sliced audio shape: {self.slices.shape}')
 =======
 >>>>>>> e48e82b0b2a71c452253773c53a7c17f271456ac:AudioRender.py
+=======
+>>>>>>> e48e82b0b2a71c452253773c53a7c17f271456ac:AudioRender.py
         
     def get_fft(self,slice_num, group_num=16, get_freq_space=False,grouped=True,localAvg=False):
         song_slice = self.audio[slice_num[0]:slice_num[1]]
         spectrum = fft(song_slice)
         spectrum = np.abs(spectrum)[:self.M//2]  # Remove the second half
+<<<<<<< HEAD:AudioRender.py
 <<<<<<< HEAD:audio_reader2.py
                 
 =======
+=======
+>>>>>>> e48e82b0b2a71c452253773c53a7c17f271456ac:AudioRender.py
         
 >>>>>>> e48e82b0b2a71c452253773c53a7c17f271456ac:AudioRender.py
         self.freq_space = (self.rate / self.M/2)
@@ -77,6 +83,7 @@ class Audio_fft():
     
     def get_wave(self,slice_num):
         return self.audio[slice_num[0]:slice_num[1]]
+<<<<<<< HEAD:AudioRender.py
 <<<<<<< HEAD:audio_reader2.py
     
 #audio = Audio_fft("test.wav",False)
@@ -84,5 +91,7 @@ class Audio_fft():
 #plt.xlim(0,262)
 #
 #a=audio.get_fft(0)
+=======
+>>>>>>> e48e82b0b2a71c452253773c53a7c17f271456ac:AudioRender.py
 =======
 >>>>>>> e48e82b0b2a71c452253773c53a7c17f271456ac:AudioRender.py
