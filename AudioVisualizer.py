@@ -82,20 +82,21 @@ class Renderer():
         left_top = (10,10)
         width_height = (784,300)
 
+        graph_col = (50,50,50)
         
         # Draw the box
         pygame.draw.rect(self.screen,(255,255,255),(left_top,width_height))
-        pygame.draw.rect(self.screen,(0,0,0),(left_top,width_height),2)
+        pygame.draw.rect(self.screen,graph_col,(left_top,width_height),2)
         
         for i in range(1,self.num_groups-1):
             if(data[i] >= 0):
                 bar_h = data[i]
                 bar_w = int((width_height[0])/(self.num_groups-2))
                 box_x = int(left_top[0] + bar_w*i - bar_w)
-                if bar_h > 300 - 4:
-                    bar_h = 300 - 4
+                if bar_h > width_height[1] - left_top[0]//2:
+                    bar_h = width_height[1] - left_top[0]//2
 
-                pygame.draw.rect(self.screen,(0,0,0),(box_x,
+                pygame.draw.rect(self.screen,graph_col,(box_x,
                                                       308,   
                                                       bar_w,
                                                       int(-bar_h))

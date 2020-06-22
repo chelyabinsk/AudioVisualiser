@@ -1,7 +1,6 @@
 # Render the audio of the wav file
 # The rendered audio is then visualized in AudioVisualizer.py
 
-
 import numpy as np
 from scipy.fftpack import fft
 from pydub import AudioSegment
