@@ -26,7 +26,7 @@ class Audio_fft():
             out.append(15.877*np.exp(i*step_size*7.1274))
         return out
                 
-    def get_fft(self,slice_num, group_num=16,song_time=0, get_freq_space=False,
+    def get_fft(self,slice_num, group_num=16, get_freq_space=False,
                 grouped=True,localAvg=False):
         
         song_slice = self.song.get_sample_slice(slice_num[0],slice_num[1]).get_array_of_samples()
@@ -38,7 +38,7 @@ class Audio_fft():
         self.freq_space = (self.rate / self.M/2)
         
         # Return not grouped fft
-        if(not grouped):
+        if not grouped:
             return spectrum
 
         # Split array
