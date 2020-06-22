@@ -4,7 +4,7 @@
 
 import pygame
 from pygame import mixer
-import mutagen.mp3
+
 import AudioRender as Audio
 import time
 import numpy as np
@@ -14,9 +14,9 @@ class Renderer():
         M = 1024  # Slice size
 
         # Load the song
-        #songName = "SimpleHarmony.wav"
-
-        songName = "backstage.wav"
+        songName = "bs.mp3"
+        
+        # Number of FFT bar groups
         self.num_groups = 31
 
         song = Audio.Audio_fft(songName, M=M,group_num=self.num_groups)
@@ -24,12 +24,11 @@ class Renderer():
         self.max_amp = song.max_amp
         self.max_amp_raw = song.max_amp_raw
         
-        # Initialize the visualizer
-        mp3 = mutagen.mp3.MP3("bs.mp3")
-        
-        pygame.mixer.init()#frequency=mp3.info.sample_rate)
+        # Initialize mixer
+        pygame.mixer.init(frequency=song.rate)
         pygame.mixer.music.load(songName)
         pygame.mixer.music.play(0)
+        # Initalise visualiser
         pygame.init()
 
         clock = pygame.time.Clock()
@@ -52,10 +51,6 @@ class Renderer():
               
             seconds = song_time/1000
             try:
-
-
-                seconds = song_time/1000
-
                 scale = int(np.floor(song.rate/M*seconds))
                 slice_num = [M*(scale),M*(scale+1)]
 
