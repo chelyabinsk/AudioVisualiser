@@ -14,7 +14,7 @@ class Renderer():
         M = 1024  # Slice size
 
         # Load the song
-        songName = "bs.mp3"
+        songName = "backstage.mp3"
         
         # Number of FFT bar groups
         self.num_groups = 31
@@ -53,11 +53,11 @@ class Renderer():
             try:
                 scale = int(np.floor(song.rate/M*seconds))
                 slice_num = [M*(scale),M*(scale+1)]
-
-                self.draw_fourier(song.get_fft(slice_num,song_time=song_time,grouped=True,localAvg=False))
+    
+                self.draw_fourier(song.get_fft(slice_num,grouped=True,localAvg=False))
                 self.draw_raw(song.get_wave(slice_num))
 
-            except:
+            except ValueError:
                 break
 
                 
@@ -116,12 +116,12 @@ class Renderer():
         avg /= (self.max_amp_raw)
         
         num_els = len(avg)
-        rec_w = width_height[0]/num_els
+        rec_w = int(width_height[0]/num_els)
         
         for i in range(num_els):
             pygame.draw.rect(self.screen,(0,0,0),(int(left_top[0]+i*rec_w),
                                                   int(left_top[1]+width_height[1]//2),
-                                                  int(rec_w),
+                                                  rec_w,
                                     int(-(width_height[1]//2)*avg[i]))
                              )
 
