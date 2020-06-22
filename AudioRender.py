@@ -39,19 +39,17 @@ class Audio_fft():
         samples = self.song[song_time:song_time+1].get_array_of_samples()
         song_slice = self.audio[slice_num[0]:slice_num[1]]
         spectrum = fft(song_slice)
+
         # Remove the second half, since the FFT of real frequencies is symmetric
         spectrum = np.abs(spectrum)[:self.M//2]  
         _spectrum = fft(samples)
 
         self.freq_space = (self.rate / self.M/2)
         
-        
         # Return not grouped fft
         if(not grouped):
             return spectrum
-        
-        # Frequency spectrum
-        
+
         # Split array
         pos = 0
         separated_arrs = [0]*self.num_groups
@@ -77,9 +75,11 @@ class Audio_fft():
         means /= (means).max()
         return means
     
+
     def get_freq_array(self):
         freq_space = (self.rate / self.M/2)
         return np.linspace(0,self.M*(freq_space+0.1),self.M/2)
+    
     
     def get_wave(self,slice_num):
         return self.audio[slice_num[0]:slice_num[1]]
