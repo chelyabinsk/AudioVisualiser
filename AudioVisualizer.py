@@ -23,13 +23,14 @@ class Renderer():
         
         self.max_amp = song.max_amp
         self.max_amp_raw = song.max_amp_raw
-        
+
+        # Initalise visualiser
+        pygame.init()        
         # Initialize mixer
+        pygame.mixer.quit()
         pygame.mixer.init(frequency=song.rate)
         pygame.mixer.music.load(songName)
         pygame.mixer.music.play(0)
-        # Initalise visualiser
-        pygame.init()
 
         clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode(resolution)
@@ -50,6 +51,7 @@ class Renderer():
                     done = True   
               
             seconds = song_time/1000
+            
             try:
                 scale = int(np.floor(song.rate/M*seconds))
                 slice_num = [M*(scale),M*(scale+1)]
