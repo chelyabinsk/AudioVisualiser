@@ -4,10 +4,10 @@
 
 import pygame
 from pygame import mixer
+import mutagen.mp3
 import AudioRender as Audio
 import time
 import numpy as np
-import sys
  
 class Renderer():
     def __init__(self,resolution=(800,720),fps=60):
@@ -25,9 +25,12 @@ class Renderer():
         self.max_amp_raw = song.max_amp_raw
         
         # Initialize the visualizer
-        pygame.init()
+        mp3 = mutagen.mp3.MP3("bs.mp3")
+        
+        pygame.mixer.init()#frequency=mp3.info.sample_rate)
         pygame.mixer.music.load(songName)
         pygame.mixer.music.play(0)
+        pygame.init()
 
         clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode(resolution)
@@ -127,4 +130,4 @@ class Renderer():
                                     int(-(width_height[1]//2)*avg[i]))
                              )
 
-app = Renderer(fps=30)
+app = Renderer(fps=15)
