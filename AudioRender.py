@@ -22,12 +22,19 @@ class Audio_fft():
         if len(self.audio.shape) != 1:
             self.audio = np.mean(self.audio, axis=1)
 
+<<<<<<< HEAD
         N = self.audio.shape[0]
         L = N / self.rate
         
         self.num_groups = group_num
         self.groups = self.gen_groups(group_num)
         
+=======
+        
+        self.num_groups = group_num
+        self.groups = self.gen_groups(group_num)
+        
+>>>>>>> 8a7913009171ec20fb2edf9ea86d605d042d3128
     def gen_groups(self,num_groups):
         step_size = 1/num_groups
         out = []
@@ -41,19 +48,28 @@ class Audio_fft():
         samples = self.song[song_time:song_time+1].get_array_of_samples()
         song_slice = self.audio[slice_num[0]:slice_num[1]]
         spectrum = fft(song_slice)
+<<<<<<< HEAD
         spectrum = np.abs(spectrum)[:self.M//2]  # Remove the second half
         
+=======
+
+        # Remove the second half, since the FFT of real frequencies is symmetric
+        spectrum = np.abs(spectrum)[:self.M//2]  
+>>>>>>> 8a7913009171ec20fb2edf9ea86d605d042d3128
         _spectrum = fft(samples)
 
         self.freq_space = (self.rate / self.M/2)
         
-        
         # Return not grouped fft
         if(not grouped):
             return spectrum
+<<<<<<< HEAD
         
         # Frequency spectrum
         
+=======
+
+>>>>>>> 8a7913009171ec20fb2edf9ea86d605d042d3128
         # Split array
         pos = 0
         separated_arrs = [0]*self.num_groups
@@ -63,17 +79,23 @@ class Audio_fft():
                 pos += 1
             separated_arrs[pos] += spectrum[i]
 
+<<<<<<< HEAD
         # for i in range(len(_spectrum)//2):
         #     if(self.groups[pos] <= (i+1)*self.freq_space):
         #         pos += 1
             
             #print(len(_spectrum),i,self.M//2)
             # separated_arrs[pos] += _spectrum[i]
+=======
+>>>>>>> 8a7913009171ec20fb2edf9ea86d605d042d3128
             
         if not localAvg:
             separated_arrs = np.nan_to_num(np.array(separated_arrs))
             return separated_arrs / (self.max_amp)
+<<<<<<< HEAD
         
+=======
+>>>>>>> 8a7913009171ec20fb2edf9ea86d605d042d3128
              
         
         # Workout averages
@@ -86,9 +108,11 @@ class Audio_fft():
         means /= (means).max()
         return means
     
+
     def get_freq_array(self):
         freq_space = (self.rate / self.M/2)
         return np.linspace(0,self.M*(freq_space+0.1),self.M/2)
+    
     
     def get_wave(self,slice_num):
         return self.audio[slice_num[0]:slice_num[1]]
