@@ -15,8 +15,8 @@ class Renderer():
 
         # Load the song
         #songName = "SimpleHarmony.wav"
-        songName = "liszt.wav"
-        self.num_groups = 30
+        songName = "backstage.wav"
+        self.num_groups = 31
         song = Audio.Audio_fft(songName, M=M,group_num=self.num_groups)
         
         self.max_amp = song.max_amp
@@ -49,15 +49,13 @@ class Renderer():
                 song_time = 0
             else:
                 song_time -= 1000
+
             seconds = song_time/1000
-            #try:
             scale = int(np.floor(song.rate/M*seconds))
             slice_num = [M*(scale),M*(scale+1)]
 
             self.draw_fourier(song.get_fft(slice_num,song_time=song_time,grouped=True,localAvg=False))
             self.draw_raw(song.get_wave(slice_num))
-            #except:
-            #    break
                 
                 
             # Titles on the screen
@@ -71,13 +69,14 @@ class Renderer():
             # Update the screen 
             pygame.display.flip()
             clock.tick(fps)
+
         pygame.quit()
 
     def draw_fourier(self,data):
         # Draw the 29 frequency bands
 
         left_top = (10,10)
-        width_height = (780,300)
+        width_height = (784,300)
         
         # Draw the box
         pygame.draw.rect(self.screen,(255,255,255),(left_top,width_height))
@@ -85,15 +84,16 @@ class Renderer():
         
         for i in range(1,self.num_groups-1):
             if(data[i] >= 0):
-                box_h = data[i]
+                bar_h = data[i]
                 bar_w = int((width_height[0])/(self.num_groups-2))
                 box_x = int(left_top[0] + bar_w*i - bar_w)
-                if box_h > 300 - 4:
-                    box_h = 300 - 4
+                if bar_h > 300 - 4:
+                    bar_h = 300 - 4
+
                 pygame.draw.rect(self.screen,(0,0,0),(box_x,
-                                                      310-2,
+                                                      308,   
                                                       bar_w,
-                                                      int(-box_h))
+                                                      int(-bar_h))
                                  )
     
     def draw_raw(self, data):
