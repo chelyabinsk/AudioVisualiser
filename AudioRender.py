@@ -22,6 +22,7 @@ class Audio_fft():
         step_size = 1/num_groups
         out = []
         for i in range(num_groups):
+            #out.append(15.877*np.exp(i*step_size*7.1274))
             out.append(15.877*np.exp(i*step_size*7.1274))
         return out
                 
