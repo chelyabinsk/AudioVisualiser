@@ -23,7 +23,7 @@ class Audio_fft():
         out = []
         for i in range(num_groups):
             #out.append(15.877*np.exp(i*step_size*7.1274))
-            out.append(15.877*np.exp(i*step_size*7.1274))
+            out.append(5.877*np.exp(i*step_size*7.6))
         return out
                 
     def get_fft(self,slice_num, group_num=16, get_freq_space=False,
@@ -48,6 +48,8 @@ class Audio_fft():
         for i in range(self.M//2):
             if(self.groups[pos] <= (i+1)*self.freq_space):
                 pos += 1
+            if pos >= len(separated_arrs):
+                pos = len(separated_arrs)-1
             separated_arrs[pos] += spectrum[i]
 
            

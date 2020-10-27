@@ -13,6 +13,7 @@ class Polynomial():
     def calc(self,y1,y2):
         x1_ = -1
         x2_ = 1
+        #print(y1)
         x1 = [x1_ for i in range(len(y1))]
         x2 = [x2_ for i in range(len(y1))]
         
@@ -21,11 +22,17 @@ class Polynomial():
         inner_x = np.linspace(x1,x2,self.steps)**self.n
         inner_y = m*inner_x+c
         return inner_y
+    
+    def calc_rgb(self,y1,y2):
+        x1_ = -1
+        x2 = 1
+        
+        pass
 
 if __name__ == '__main__':
     L = Polynomial(10,n=3)
-    a=L.calc(np.array([5,1]),
-                 np.array([6,6]))
+    a=L.calc_rgb(np.array([5,1,2]),
+                 np.array([6,6,6]))
           
     for i in a:
         print(i[0])
