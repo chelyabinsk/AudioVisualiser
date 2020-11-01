@@ -21,6 +21,7 @@ class Bar_window():
         self.rotation_shift_2 = 1/(2*math.pi*60)*0.25
         self.add_bar()
         self.add_centre()
+        self.first_circle_max_height = 80
     
     def make_shift(self):
         self.shift_1 += random.randint(-1, 1)
@@ -30,7 +31,6 @@ class Bar_window():
         for c,bar in enumerate(self.bars):
             if c < self.N:
                 bar.theta += self.rotation_shift_1
-
             else:
                 bar.theta += self.rotation_shift_2
             if bar.theta < 0:
@@ -70,14 +70,14 @@ class Bar_window():
         width = 3
         height = 0
         
-        r = 105
+        r = 140
         
         x_1 = self.size[0]//2
         y_1 = self.size[1]//2
         
-        theta_step = 2*math.pi/(self.N)
+        theta_step = 2*math.pi/(self.N-1)
         
-        for i in range(self.N+1):
+        for i in range(self.N):
             width_height = (width,height)
             
             rad = theta_step*i
@@ -105,15 +105,18 @@ class Bar_window():
         
     def update_bars(self,heights,colours):
         self.window.fill((0,0,0))  # Draw background
-        
         # Update first circle
+        # print()
+        # print(heights[0],heights[98])
         for c,b in enumerate(self.bars):         
             if c < self.N:
-                b.update_bar(heights[c-1],colours[c-1])
+                tmp_height = 0.5*heights[c-1]
+                if tmp_height > self.first_circle_max_height:
+                    tmp_height = self.first_circle_max_height
+                b.update_bar(tmp_height,colours[c-1])
             elif c > self.N:
                 tmp_pos = c-self.N-1
-                # print(tmp_pos,len(heights),len(colours))
-                b.update_bar(6*heights[tmp_pos-1],colours[tmp_pos-1])
+                b.update_bar(2*heights[tmp_pos-1],colours[tmp_pos-1])
     
 class Bar():
     def __init__(self,surface,centre,b_id,width_height,r,colour,theta=0,plot_type='circle'):
@@ -225,7 +228,7 @@ class Renderer():
         self.ccc = []
         self.prev_ccc = np.array([[[0,0,0] for j in range(self.jump_fps-1)] for i in range(1,self.n_bars)])
         
-        self.first_circle_max_height = 50
+        self.first_circle_max_height = 80
         
         
         # Initalise visualiser
@@ -261,8 +264,8 @@ class Renderer():
                 # self.bars[i-1].colour = prev_ccc[i-1][frame_count-1]
                 colours.append(self.prev_ccc[i-1][frame])
                 tmp_h_curr = self.inner_vals[frame][i]
-                if tmp_h_curr > self.first_circle_max_height:
-                    tmp_h_curr = self.first_circle_max_height                
+                # if tmp_h_curr > self.first_circle_max_height:
+                #     tmp_h_curr = self.first_circle_max_height                
                 heights.append(tmp_h_curr)
                 pass
             self.visual.update_bars(
@@ -322,9 +325,9 @@ class Renderer():
         # # print(self.N,prev_ccc)
         
         # # Set colour for each bar
-        for i in range(1,self.n_bars):
+        # for i in range(1,self.n_bars):
             # self.bars[i-1].colour = prev_ccc[i-1][frame_count-1]
-            pass
+            # pass
         
             
         # self.draw_fourier(inner_vals[frame_count-1])
